@@ -31,6 +31,12 @@ node {
          // sh 'docker build -t api .'
          //This should work.
          sh "/Applications/Docker.app/Contents/Resources/bin/docker run -p 3000:3000 api"
+         dir('test'){
+           git url: 'https://github.com/benrconway/JenkinsTest2.git'
+           nodejs('testJS'){
+             sh 'npm install'
+             sh 'npm test'
+           }
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker container logs laughing_lumiere"
          // sh "docker run -p 3000:3000 api"
 

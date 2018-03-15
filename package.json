@@ -8,8 +8,8 @@
   },
   "scripts": {
     "build": "npm install",
-    "test": "mocha test",
-    "start": "node server.js & npm test"
+    "test": "",
+    "start": "node server.js &"
 
   },
   "author": "",
