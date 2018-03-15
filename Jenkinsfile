@@ -30,18 +30,18 @@ node {
          * For this example, we're using a Volkswagen-type approach ;-) */
          // sh 'docker build -t api .'
          //This should work.
-         sh "/Applications/Docker.app/Contents/Resources/bin/docker run -p 3000:3000 api"
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker start laughing_lumiere"
          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -a"
 
 
-         // dir('test'){
-           // git url: 'https://github.com/benrconway/JenkinsTest2.git'
-           // nodejs('testJS'){
-           //   sh 'npm install'
-           //   sh 'npm test'
-           // }
-           // sh 'curl -f http://127.0.0.1:3000/api || exit 1'
-         // }
+         dir('test'){
+           git url: 'https://github.com/benrconway/JenkinsTest2.git'
+           nodejs('testJS'){
+             sh 'npm install'
+             sh 'npm test'
+           }
+           sh 'curl -f http://127.0.0.1:3000/api || exit 1'
+         }
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker container logs laughing_lumiere"
          // sh "docker run -p 3000:3000 api"
 
