@@ -31,8 +31,8 @@ node {
          // sh 'docker build -t api .'
          //This should work.
          sh "/Applications/Docker.app/Contents/Resources/bin/docker start laughing_lumiere"
-         sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -a && sleep 10"
-
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -a"
+         
          sh 'curl -f http://127.0.0.1:3000/api || echo "no luck"'
          sh 'curl -f http://0.0.0.0:3000/api || echo "no luck"'
 
