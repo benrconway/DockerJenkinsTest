@@ -41,7 +41,7 @@ node {
              sh 'npm test'
            }
            // sh 'curl -f http://127.0.0.1:3000/api || echo "no luck"'
-           // sh 'curl -f http://0.0.0.0:3000/api || echo "no luck"'
+           sh 'curl -f http://0.0.0.0:3000/api || echo "no luck"'
          }
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker container logs laughing_lumiere"
          // sh "docker run -p 3000:3000 api"
