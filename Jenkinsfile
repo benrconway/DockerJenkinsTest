@@ -31,7 +31,7 @@ node {
          // sh 'docker build -t api .'
          //This should work.
          sh "/Applications/Docker.app/Contents/Resources/bin/docker run -p 3000:3000 api"
-         sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -a"
 
 
          // dir('test'){
