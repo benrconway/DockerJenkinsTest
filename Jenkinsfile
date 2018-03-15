@@ -37,6 +37,7 @@ node {
              sh 'npm install'
              sh 'npm test'
            }
+         }
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker container logs laughing_lumiere"
          // sh "docker run -p 3000:3000 api"
 
