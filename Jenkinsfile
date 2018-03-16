@@ -15,10 +15,10 @@ node {
     //     /* This builds the actual image; synonymous to
     //      * docker build on the command line */
     //     // app = docker.build("api")
-    // sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
-    // sh "/Applications/Docker.app/Contents/Resources/bin/docker run --name georgie -p 3000:3000 api"
+    sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
+    sh "/Applications/Docker.app/Contents/Resources/bin/docker run --name npm_script_test -p 3000:3000 api"
     // sh "/Applications/Docker.app/Contents/Resources/bin/docker start georgie"
-    sh "/Applications/Docker.app/Contents/Resources/bin/docker start loving_sinoussi"
+    sh "/Applications/Docker.app/Contents/Resources/bin/docker start npm_script_test"
     sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
 
     //     Below are FAILED commands
@@ -60,7 +60,7 @@ node {
          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
 
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker stop loving_sinoussi"
-         sh "/Applications/Docker.app/Contents/Resources/bin/docker stop georgie"
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker stop npm_script_test"
 
          // sh 'curl -f http://0.0.0.0:3000/api || echo "no luck at all"'
 
