@@ -54,6 +54,7 @@ node {
              sh 'npm test'
            }
          }
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
 
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker stop loving_sinoussi"
          sh "/Applications/Docker.app/Contents/Resources/bin/docker stop georgie"
