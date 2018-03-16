@@ -23,6 +23,9 @@ node {
           sh "/Applications/Docker.app/Contents/Resources/bin/docker start npm_script_test"
           sh "/Applications/Docker.app/Contents/Resources/bin/docker ps -a"
 
+          //Future proofing attempts to make it wait for the server to be running before continuing
+          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -f status=running | grep -e $1 | wc -l"
+
           // This one has yet to pass, theory is separate thread is starting up the
           // docker image, so server isn't there yet.
           sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
