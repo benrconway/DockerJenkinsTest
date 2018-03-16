@@ -18,7 +18,7 @@ node {
           //     // app = docker.build("api")
 
           // I have opted for clarity of CLI commands.
-          sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
+          sh "/Applications/Docker.app/Contents/Resources/bin/docker build -q -t api ."
           sh "/Applications/Docker.app/Contents/Resources/bin/docker create --name npm_script_test -p 3000:3000 api"
           sh "/Applications/Docker.app/Contents/Resources/bin/docker start npm_script_test"
           sh "/Applications/Docker.app/Contents/Resources/bin/docker ps -a"
