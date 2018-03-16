@@ -48,6 +48,7 @@ pipeline {
         }
         stage('Cleanup'){
           steps{
+              echo 'Cleaning up'
               //Here I will turn off all containers, remove containers, images etc
               // Clean up is a good word for it. This way all resources output no junk.
 
