@@ -18,9 +18,8 @@ node {
           //     // app = docker.build("api")
 
           // I have opted for clarity of CLI commands.
-          // sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
-          // sh "/Applications/Docker.app/Contents/Resources/bin/docker run --name npm_script_test -p 3000:3000 api"
-          // As a container exists, I simply run it
+          sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
+          sh "/Applications/Docker.app/Contents/Resources/bin/docker run --name npm_script_test -p 3000:3000 api"
           sh "/Applications/Docker.app/Contents/Resources/bin/docker start npm_script_test"
           sh "/Applications/Docker.app/Contents/Resources/bin/docker ps -a"
 
@@ -48,13 +47,15 @@ node {
          //This should work.
          // Checking status of containers.
          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
+
          // There seems to be an issue of starting up, but as it is started in the
          // stage above, I am not concerned at present.
          // sh 'timeout 5'
+
          //Simple curls to test if pinging the address works.
-         sh 'curl -f http://127.0.0.1:3000/api || echo "ip#127 failed"'
-         sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
-         sh 'curl -f http://localhost:3000/api || echo "Test 2 failed"'
+         // sh 'curl -f http://127.0.0.1:3000/api || echo "ip#127 failed"'
+         // sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
+         // sh 'curl -f http://localhost:3000/api || echo "Test 2 failed"'
          // as of last run, all were successful in sampling the JSON stored
 
 
@@ -95,11 +96,19 @@ node {
 
       //Stops the running container
       sh "/Applications/Docker.app/Contents/Resources/bin/docker stop npm_script_test"
+      // Remove the stopped container
+      sh "/Applications/Docker.app/Contents/Resources/bin/docker rm npm_script_test"
+      // Remove image now that it is "dangling"
+      sh "/Applications/Docker.app/Contents/Resources/bin/docker rmi api"
 
       // Removes all stopped containers.
       // -aq = Only Id of all containers
       // --no-trunc prevents truncating the output (everthing runs together)
       // it then passes the commands by manner of pipe to docker rm
+      //sh "/Applications/Docker.app/Contents/Resources/bin/docker ps -aq --no-trunc | xargs docker rm"
+      // Above doesn't work as pipe doesn't seem to behave appropriately.
+
+      // Final check to be sure all images and containers are removed.
       sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -a"
       sh "/Applications/Docker.app/Contents/Resources/bin/docker images ls -a"
       // sh "/Applications/Docker.app/Contents/Resources/bin/docker ps -aq --no-trunc | xargs docker rm "
