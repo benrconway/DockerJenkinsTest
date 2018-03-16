@@ -4,6 +4,7 @@ pipeline {
     agent any
     environment {
       CI = 'true'
+      //Tool declaration allows the path of tools to differ between OSs
       DOCKER = tool('testDocker')
     }
     stages {
@@ -18,7 +19,8 @@ pipeline {
 
                //Future proofing attempts to make it wait for the server to be running before continuing
                // sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -f status=running | grep -e $1 | wc -l"
-               sh "${DOCKER}/Contents/Resources/bin/docker container ls -f status=running | grep -e npm_script_test | wc -l"
+               // sh "${DOCKER}/Contents/Resources/bin/docker container ls -f status=running | grep -e npm_script_test | wc -l"
+               sh "serverCheck.sh"
 
                // This one has yet to pass, theory is separate thread is starting up the
                // docker image, so server isn't there yet.
@@ -44,6 +46,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying'
+                //We don't have anything except theories for this part.
             }
         }
         stage('Cleanup'){
@@ -69,13 +72,13 @@ pipeline {
 }
 
 
-    // Slacking is something I want to understand how to make work in general.
+    // // Slacking is something I want to understand how to make work in general.
     // post {
     //      success {
-    //          slackSend baseUrl: 'https://bemohq.slack.com/services/hooks/jenkins-ci/', channel: '', color: '#007F00', message: "Success ${env.JOB_NAME} ${env.BUILD_ID} (<${env.JENKINS_URL}/job/PwcCompliance/${env.BUILD_ID}|Open>)", tokenCredentialId: '$PWC_SLACK_TOKEN'
+    //          slackSend baseUrl: 'https://bemohq.slack.com/services/hooks/jenkins-ci/', channel: '#bmas', color: '#007F00', message: ":celeryman: Success! :celeryman: ${env.JOB_NAME} ${env.BUILD_ID}", tokenCredentialId: '$PWC_SLACK_TOKEN'
     //      }
     //
     //      failure {
-    //          slackSend baseUrl: 'https://bemohq.slack.com/services/hooks/jenkins-ci/', channel: '#pwc', color: '#E63247', message: "******:fire:FAILURE:fire:****** ${env.JOB_NAME} ${env.BUILD_ID} (<${env.JENKINS_URL}/job/PwcCompliance/${env.BUILD_ID}|Open>)", tokenCredentialId: '$PWC_SLACK_TOKEN'
+    //          slackSend baseUrl: 'https://bemohq.slack.com/services/hooks/jenkins-ci/', channel: '#bmas', color: '#E63247', message: ":explodinghead: ${env.JOB_NAME} ${env.BUILD_ID}", tokenCredentialId: '$PWC_SLACK_TOKEN'
     //      }
     //  }
