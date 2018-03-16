@@ -18,6 +18,7 @@ node {
     // sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
     // sh "/Applications/Docker.app/Contents/Resources/bin/docker run --name georgie -p 3000:3000 api"
     sh "/Applications/Docker.app/Contents/Resources/bin/docker start georgie"
+    sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
 
     //     Below are FAILED commands
     //     //This one works in my docker container jenkins.
