@@ -32,21 +32,23 @@ node {
          //This should work.
 
          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -a"
-         sh "/Applications/Docker.app/Contents/Resources/bin/docker start laughing_lumiere"
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker start wonderful_colden"
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker container logs laughing_lumiere"
          // sh "sleep 3"
          // sh 'curl -f http://127.0.0.1:3000/api || echo "no luck"'
+         sh 'sleep 3' 
          sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
          sh 'curl -f http://localhost:3000/api || echo "Test 2 failed"'
 
          //
-         dir('test'){
-           git url: 'https://github.com/benrconway/JenkinsTest2.git'
-           nodejs('testJS'){
-             sh 'npm install'
-             // sh 'npm test'
-           }
-         }
+         // dir('test'){
+         //   git url: 'https://github.com/benrconway/JenkinsTest2.git'
+         //   nodejs('testJS'){
+         //     sh 'npm install'
+         //     // sh 'npm test'
+         //   }
+         // }
          sh 'curl -f http://0.0.0.0:3000/api || echo "no luck at all"'
          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
 
