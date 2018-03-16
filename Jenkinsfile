@@ -18,7 +18,7 @@ pipeline {
       //     // Remove image now that it is "dangling"
       //     sh "${DOCKER}/Contents/Resources/bin/docker rmi api"
       //   }
-      }
+      // }
       stage('Build') {
           steps {
             //Ensure nothing running, and all clean
