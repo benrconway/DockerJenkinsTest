@@ -15,7 +15,7 @@ node {
     //     /* This builds the actual image; synonymous to
     //      * docker build on the command line */
     //     // app = docker.build("api")
-    sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
+    // sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
     sh "/Applications/Docker.app/Contents/Resources/bin/docker run --name npm_script_test -p 3000:3000 api"
     // sh "/Applications/Docker.app/Contents/Resources/bin/docker start georgie"
     sh "/Applications/Docker.app/Contents/Resources/bin/docker start npm_script_test"
