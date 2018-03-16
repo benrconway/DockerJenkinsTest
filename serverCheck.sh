@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set +x
 RUNNING=1
 while [  $RUNNING -eq 1 ]; do
     docker container ls -f status=running | grep -q -e $1
