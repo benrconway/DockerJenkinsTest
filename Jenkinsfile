@@ -62,7 +62,6 @@ node {
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker container logs laughing_lumiere"
          // sh "docker run -p 3000:3000 api"
 
-
          //
          // docker.run("api")
          // docker.logs("api")
