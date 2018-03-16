@@ -41,6 +41,7 @@ node {
          // sh "sleep 3"
          // sh 'curl -f http://127.0.0.1:3000/api || echo "ip#127 failed"'
          // //
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker start georgie"
          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
          // sh 'timeout 5'
          sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
