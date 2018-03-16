@@ -54,6 +54,7 @@ node {
 
          //Simple curls to test if pinging the address works.
          sh 'curl -f http://127.0.0.1:3000/api || echo "ip#127 failed"'
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
          sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
          sh 'curl -f http://localhost:3000/api || echo "Test 2 failed"'
          // as of last run, all were successful in sampling the JSON stored
