@@ -16,8 +16,8 @@ node {
     //      * docker build on the command line */
     //     // app = docker.build("api")
     sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
-    sh "/Applications/Docker.app/Contents/Resources/bin/docker run -p 3000:3000 api"
-    // sh "/Applications/Docker.app/Contents/Resources/bin/docker start loving_sinoussi"
+    sh "/Applications/Docker.app/Contents/Resources/bin/docker run --name georgie -p 3000:3000 api"
+    sh "/Applications/Docker.app/Contents/Resources/bin/docker start georgie"
 
     //     Below are FAILED commands
     //     //This one works in my docker container jenkins.
@@ -56,6 +56,7 @@ node {
          }
 
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker stop loving_sinoussi"
+         sh "/Applications/Docker.app/Contents/Resources/bin/docker stop georgie"
 
          // sh 'curl -f http://0.0.0.0:3000/api || echo "no luck at all"'
 
