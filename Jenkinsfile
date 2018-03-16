@@ -15,8 +15,9 @@ node {
     //     /* This builds the actual image; synonymous to
     //      * docker build on the command line */
     //     // app = docker.build("api")
-    // sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
-    sh "/Applications/Docker.app/Contents/Resources/bin/docker start loving_sinoussi"
+    sh "/Applications/Docker.app/Contents/Resources/bin/docker build -t api ."
+    sh "/Applications/Docker.app/Contents/Resources/bin/docker run -p 3000:3000 api"
+    // sh "/Applications/Docker.app/Contents/Resources/bin/docker start loving_sinoussi"
 
     //     Below are FAILED commands
     //     //This one works in my docker container jenkins.
