@@ -3,9 +3,9 @@ node {
     // def app
 
     // Not certain of tool settings or environment inside of this form of pipeline.
-    // environment{
-    //   tools {docker "testDocker"}
-    // }
+    environment{
+      tools {docker "testDocker"}
+    }
     stage('Clone repository') {
         /* Let's make sure we have the repository cloned to our workspace */
 
@@ -22,6 +22,7 @@ node {
           sh "/Applications/Docker.app/Contents/Resources/bin/docker create --name npm_script_test -p 3000:3000 api"
           sh "/Applications/Docker.app/Contents/Resources/bin/docker start npm_script_test"
           sh "/Applications/Docker.app/Contents/Resources/bin/docker ps -a"
+          sh "${docker}/Contents/Resources/bin/docker ps -a"
 
           //Future proofing attempts to make it wait for the server to be running before continuing
           // sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -f status=running | grep -e $1 | wc -l"
