@@ -19,6 +19,7 @@ node {
     // sh "/Applications/Docker.app/Contents/Resources/bin/docker run --name npm_script_test -p 3000:3000 api"
     // sh "/Applications/Docker.app/Contents/Resources/bin/docker start georgie"
     sh "/Applications/Docker.app/Contents/Resources/bin/docker start npm_script_test"
+    sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -a"
     sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
 
     //     Below are FAILED commands
@@ -50,13 +51,13 @@ node {
          sh 'curl -f http://localhost:3000/api || echo "Test 2 failed"'
 
 
-         // dir('test'){
-         //   git url: 'https://github.com/benrconway/JenkinsTest2.git'
-         //   nodejs('testJS'){
-         //     sh 'npm install'
-         //     sh 'npm test'
-         //   }
-         // }
+         dir('test'){
+           git url: 'https://github.com/benrconway/JenkinsTest2.git'
+           nodejs('testJS'){
+             sh 'npm install'
+             sh 'npm test'
+           }
+         }
          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
 
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker stop loving_sinoussi"
