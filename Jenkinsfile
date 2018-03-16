@@ -100,12 +100,15 @@ node {
       // -aq = Only Id of all containers
       // --no-trunc prevents truncating the output (everthing runs together)
       // it then passes the commands by manner of pipe to docker rm
-      sh "/Applications/Docker.app/Contents/Resources/bin/docker ps -aq --no-trunc | xargs docker rm "
+      sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -a"
+      sh "/Applications/Docker.app/Contents/Resources/bin/docker images ls -a"
+      // sh "/Applications/Docker.app/Contents/Resources/bin/docker ps -aq --no-trunc | xargs docker rm "
+      sh "/Applications/Docker.app/Contents/Resources/bin/docker ps -aq --no-trunc"
 
       //Removes docker images which are not being used by any containers.
       // -q is quiet output, filter is straightforward and again it is
       // piped to docker rmi.
-      sh "/Applications/Docker.app/Contents/Resources/bin/docker images -q --filter dangling=true | xargs docker rmi"
+      // sh "/Applications/Docker.app/Contents/Resources/bin/docker images -q --filter dangling=true | xargs docker rmi"
 
      }
     // Slacking is something I want to understand how to make work in general.
