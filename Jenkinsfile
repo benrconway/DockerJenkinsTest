@@ -20,7 +20,7 @@ pipeline {
                //Future proofing attempts to make it wait for the server to be running before continuing
                // sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -f status=running | grep -e $1 | wc -l"
                // sh "${DOCKER}/Contents/Resources/bin/docker container ls -f status=running | grep -e npm_script_test | wc -l"
-               sh "serverCheck.sh"
+               sh "./serverCheck.sh"
 
                // This one has yet to pass, theory is separate thread is starting up the
                // docker image, so server isn't there yet.
