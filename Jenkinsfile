@@ -33,7 +33,7 @@ pipeline {
              // sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -f status=running | grep -e $1 | wc -l"
              // sh "${DOCKER}/Contents/Resources/bin/docker container ls -f status=running | grep -e npm_script_test | wc -l"
              // sh "./serverCheck.sh"
-             sh 'sleep 3'
+             sh 'sleep 1'
 
              // This one has yet to pass, theory is separate thread is starting up the
              // docker image, so server isn't there yet.
