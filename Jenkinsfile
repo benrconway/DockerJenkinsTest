@@ -43,17 +43,17 @@ node {
          // //
          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
          // sh 'timeout 5'
-         // sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
-         // sh 'curl -f http://localhost:3000/api || echo "Test 2 failed"'
+         sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
+         sh 'curl -f http://localhost:3000/api || echo "Test 2 failed"'
 
 
-         dir('test'){
-           git url: 'https://github.com/benrconway/JenkinsTest2.git'
-           nodejs('testJS'){
-             sh 'npm install'
-             sh 'npm test'
-           }
-         }
+         // dir('test'){
+         //   git url: 'https://github.com/benrconway/JenkinsTest2.git'
+         //   nodejs('testJS'){
+         //     sh 'npm install'
+         //     sh 'npm test'
+         //   }
+         // }
          sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls"
 
          // sh "/Applications/Docker.app/Contents/Resources/bin/docker stop loving_sinoussi"
