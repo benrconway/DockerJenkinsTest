@@ -55,7 +55,7 @@ node {
            }
          }
 
-         sh "/Applications/Docker.app/Contents/Resources/bin/docker stop loving_sinoussi"
+         // sh "/Applications/Docker.app/Contents/Resources/bin/docker stop loving_sinoussi"
 
          // sh 'curl -f http://0.0.0.0:3000/api || echo "no luck at all"'
 

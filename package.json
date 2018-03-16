@@ -9,7 +9,7 @@
   "scripts": {
     "build": "npm install",
     "test": "",
-    "start": "node server.js"
+    "start": "node server.js &"
 
   },
   "author": "",
