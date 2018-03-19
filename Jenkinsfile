@@ -81,7 +81,13 @@ pipeline {
             sh "${DOCKER}/Contents/Resources/bin/docker ps -aq --no-trunc"
             sh 'rm -rf ./test'
             sh 'rm -rf ./test@tmp'
+            echo first
             sh 'ls -al'
+            //Testing this function.
+            deleteDir()
+            echo second
+            sh 'ls -al'
+
           }
         }
     }
