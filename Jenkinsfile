@@ -6,6 +6,7 @@ pipeline {
       CI = 'true'
       //Tool declaration allows the path of tools to differ between OSs
       DOCKER = tool('testDocker')
+      // BMAS_SLACK_TOKEN = credentials('bmas_jenkins_slack')
     }
     stages {
       // stage('Prepare the Scene'){
@@ -29,14 +30,19 @@ pipeline {
             sh "${DOCKER}/Contents/Resources/bin/docker start npm_script_test"
             sh "${DOCKER}/Contents/Resources/bin/docker ps -a"
 
-             //Future proofing attempts to make it wait for the server to be running before continuing
+             // Future proofing attempts to make it wait for the server to be
+             // running before continuing
+             // First answer to the problem raised by the time between starting
+             // the container and being able to hit the api
              // sh "/Applications/Docker.app/Contents/Resources/bin/docker container ls -f status=running | grep -e $1 | wc -l"
+             // Modification for this pipeline
              // sh "${DOCKER}/Contents/Resources/bin/docker container ls -f status=running | grep -e npm_script_test | wc -l"
-             // sh "./serverCheck.sh"
-             sh 'sleep 1'
 
-             // This one has yet to pass, theory is separate thread is starting up the
-             // docker image, so server isn't there yet.
+             // Addition of this script allows us to know that the pipeline will
+             // not continue until the server is live and healthy.
+             sh "./serverCheck.sh"
+
+             //This curl is here to ping the api and act as redundancy for the serverCheck script above.
              sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
           }
       }
@@ -44,8 +50,10 @@ pipeline {
           steps {
                 echo 'Testing now.'
 
-                // Test to bring BDD test stored outside Docker in to run tests on
-                // container logic
+                // The Docker container and server is currently running in the
+                // background, so below I am creating and moving into a new directory
+                // in the Jenkins Pipeline. Inside this new directory, I clone
+                // the named git repo and run the following nodejs commands.
                 dir('test'){
                   git url: 'https://github.com/benrconway/JenkinsTest2.git'
                   nodejs('testJS'){
@@ -79,6 +87,7 @@ pipeline {
             sh "${DOCKER}/Contents/Resources/bin/docker container ls -a"
             sh "${DOCKER}/Contents/Resources/bin/docker images ls -a"
             sh "${DOCKER}/Contents/Resources/bin/docker ps -aq --no-trunc"
+            sh 'ls -al'
           }
         }
     }
