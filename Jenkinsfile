@@ -3,7 +3,6 @@
 pipeline {
     agent any
     environment {
-      // CI = 'true'
       //Tool declaration allows the path of tools to differ between OSs
       DOCKER = tool('testDocker')
       // SLACK_TOKEN = credentials('company_slack_token')
