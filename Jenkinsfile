@@ -68,19 +68,19 @@ pipeline {
             //Here I will turn off all containers, remove containers, images etc
             // Clean up is a good word for it. This way all resources output no junk.
 
-            //Stops the running container
-            sh "${DOCKER}/Contents/Resources/bin/docker stop npm_script_test"
-            // Remove the stopped container
-            sh "${DOCKER}/Contents/Resources/bin/docker rm npm_script_test"
-            // Remove image now that it is "dangling"
-            sh "${DOCKER}/Contents/Resources/bin/docker rmi api"
-
-            // Final check to be sure all images and containers are removed.
-            sh "${DOCKER}/Contents/Resources/bin/docker container ls -a"
-            sh "${DOCKER}/Contents/Resources/bin/docker images ls -a"
-            sh "${DOCKER}/Contents/Resources/bin/docker ps -aq --no-trunc"
-            sh 'rm -rf ./test'
-            sh 'rm -rf ./test@tmp'
+            // //Stops the running container
+            // sh "${DOCKER}/Contents/Resources/bin/docker stop npm_script_test"
+            // // Remove the stopped container
+            // sh "${DOCKER}/Contents/Resources/bin/docker rm npm_script_test"
+            // // Remove image now that it is "dangling"
+            // sh "${DOCKER}/Contents/Resources/bin/docker rmi api"
+            //
+            // // Final check to be sure all images and containers are removed.
+            // sh "${DOCKER}/Contents/Resources/bin/docker container ls -a"
+            // sh "${DOCKER}/Contents/Resources/bin/docker images ls -a"
+            // sh "${DOCKER}/Contents/Resources/bin/docker ps -aq --no-trunc"
+            // sh 'rm -rf ./test'
+            // sh 'rm -rf ./test@tmp'
             echo 'first'
             sh 'ls -al'
             //Testing this function.
