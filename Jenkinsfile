@@ -9,8 +9,10 @@ pipeline {
       // BMAS_SLACK_TOKEN = credentials('bmas_jenkins_slack')
     }
     stages {
-      // stage('Prepare the Scene'){
-      //   steps{
+      stage('Prepare the Scene'){
+        steps{
+          // Does the test folder still exist
+          sh 'ls -al'
       //     echo "Building construction area"
       //     // Stops a running container.
       //     sh "${DOCKER}/Contents/Resources/bin/docker stop npm_script_test"
@@ -18,8 +20,8 @@ pipeline {
       //     sh "${DOCKER}/Contents/Resources/bin/docker rm npm_script_test"
       //     // Remove image now that it is "dangling"
       //     sh "${DOCKER}/Contents/Resources/bin/docker rmi api"
-      //   }
-      // }
+        }
+      }
       stage('Build') {
           steps {
             //Ensure nothing running, and all clean
