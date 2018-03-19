@@ -89,6 +89,8 @@ pipeline {
             sh "${DOCKER}/Contents/Resources/bin/docker container ls -a"
             sh "${DOCKER}/Contents/Resources/bin/docker images ls -a"
             sh "${DOCKER}/Contents/Resources/bin/docker ps -aq --no-trunc"
+            sh 'rm -rf ./test'
+            sh 'rm -rf ./test@tmp'
             sh 'ls -al'
           }
         }
