@@ -3,29 +3,14 @@
 pipeline {
     agent any
     environment {
-      CI = 'true'
+      // CI = 'true'
       //Tool declaration allows the path of tools to differ between OSs
       DOCKER = tool('testDocker')
-      // BMAS_SLACK_TOKEN = credentials('bmas_jenkins_slack')
+      // SLACK_TOKEN = credentials('company_slack_token')
     }
     stages {
-      stage('Prepare the Scene'){
-        steps{
-          // Does the test folder still exist
-          sh 'ls -al'
-      //     echo "Building construction area"
-      //     // Stops a running container.
-      //     sh "${DOCKER}/Contents/Resources/bin/docker stop npm_script_test"
-      //     // Remove the stopped container
-      //     sh "${DOCKER}/Contents/Resources/bin/docker rm npm_script_test"
-      //     // Remove image now that it is "dangling"
-      //     sh "${DOCKER}/Contents/Resources/bin/docker rmi api"
-        }
-      }
       stage('Build') {
           steps {
-            //Ensure nothing running, and all clean
-
             // Use of tool allows for greater portability across platforms.
             sh "${DOCKER}/Contents/Resources/bin/docker build -q -t api ."
             sh "${DOCKER}/Contents/Resources/bin/docker create --name npm_script_test -p 3000:3000 api"
@@ -46,6 +31,11 @@ pipeline {
 
              //This curl is here to ping the api and act as redundancy for the serverCheck script above.
              sh 'curl -f http://0.0.0.0:3000/api || echo "Test 1 failed"'
+
+             //  In Jenkins2 it is also possible to use more inbuilt commands, ie
+             // docker.build()
+             // docker.run()
+             // with extra arguments listed inside the round brackets.
           }
       }
       stage('Test') {
@@ -69,7 +59,7 @@ pipeline {
       stage('Deploy') {
           steps {
               echo 'Deploying'
-              //We don't have anything except theories for this part.
+              //At this stage we will deploy our file to Server.
           }
       }
       stage('Cleanup'){
@@ -101,10 +91,10 @@ pipeline {
     // // Slacking is something I want to understand how to make work in general.
     // post {
     //      success {
-    //          slackSend baseUrl: 'https://bemohq.slack.com/services/hooks/jenkins-ci/', channel: '#bmas', color: '#007F00', message: ":celeryman: Success! :celeryman: ${env.JOB_NAME} ${env.BUILD_ID}", tokenCredentialId: '$PWC_SLACK_TOKEN'
+    //          slackSend baseUrl: '$company_slack_url', channel: '#channelName', color: '#007F00', message: ":celeryman: Success! :celeryman: ${env.JOB_NAME} ${env.BUILD_ID}", tokenCredentialId: '$SLACK_TOKEN'
     //      }
     //
     //      failure {
-    //          slackSend baseUrl: 'https://bemohq.slack.com/services/hooks/jenkins-ci/', channel: '#bmas', color: '#E63247', message: ":explodinghead: ${env.JOB_NAME} ${env.BUILD_ID}", tokenCredentialId: '$PWC_SLACK_TOKEN'
+    //          slackSend baseUrl: '$company_slack_url', channel: '#channelName', color: '#E63247', message: ":explodinghead: ${env.JOB_NAME} ${env.BUILD_ID}", tokenCredentialId: '$SLACK_TOKEN'
     //      }
     //  }
