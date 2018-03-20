@@ -59,20 +59,21 @@ pipeline {
       stage('Deploy') {
           steps {
               echo 'Deploying'
-              // At this stage we will deploy our file to Server.
+              // At this stage we will deploy our file wherever it needs to go.
           }
       }
       stage('Cleanup'){
         steps{
             echo 'Cleaning up'
-            // Here I will turn off all containers, remove containers, images etc
-            // Clean up is a good word for it. This way all resources output no junk.
+            // Here I will turn off the container, remove it and associated images.
+            // Then I will use the final command to clean the current workspace
+            // ready for the next time the job is run
 
-            // Stops the running container
+            // Stop the running container
             sh "${DOCKER}/Contents/Resources/bin/docker stop npm_script_test"
             // Remove the stopped container
             sh "${DOCKER}/Contents/Resources/bin/docker rm npm_script_test"
-            // Remove image now that it is "dangling"
+            // Remove image now that it is "dangling" (has no associated container)
             sh "${DOCKER}/Contents/Resources/bin/docker rmi api"
 
             // Final check to be sure all images and containers are removed.
@@ -80,7 +81,7 @@ pipeline {
             sh "${DOCKER}/Contents/Resources/bin/docker images ls -a"
             sh "${DOCKER}/Contents/Resources/bin/docker ps -aq --no-trunc"
 
-            // This function cleans out the workspace completely.
+            // This is a Jenkins function that cleans the workspace completely.
             deleteDir()
 
           }
