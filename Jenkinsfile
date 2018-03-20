@@ -51,9 +51,7 @@ pipeline {
                   nodejs('testJS'){
                     sh 'npm install'
                     sh 'npm test'
-
                   }
-                  sh 'ls -al'
                 }
 
           }
