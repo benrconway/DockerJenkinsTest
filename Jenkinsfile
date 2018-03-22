@@ -5,6 +5,7 @@ pipeline {
     environment {
 
       // Tool declaration allows the path of tools to differ between OSs
+      MAVEN = tool('MavenTool')
       DOCKER = tool('testDocker')
       // SLACK_TOKEN = credentials('company_slack_token')
     }
@@ -46,15 +47,23 @@ pipeline {
                 // background, so below I am creating and moving into a new directory
                 // in the Jenkins Pipeline. Inside this new directory, I clone
                 // the named git repo and run the following nodejs commands.
+                // With Node:
+                // dir('test'){
+                //   git url: 'https://github.com/benrconway/JenkinsTest2.git'
+                //   nodejs('testJS'){
+                //     sh 'npm install'
+                //     sh 'npm test'
+                //   }
+                // }
+                // With Maven:
                 dir('test'){
-                  git url: 'https://github.com/benrconway/JenkinsTest2.git'
-                  nodejs('testJS'){
-                    sh 'npm install'
-                    sh 'npm test'
+                  git url: 'https://github.com/benrconway/MavenJenkins.git'
+                  withMaven(maven:'MavenTool') {
+                      sh "mvn test"
+                    }
+                    // sh "${MAVEN}/bin/mvn clean test" 
                   }
                 }
-
-          }
       }
       stage('Deploy') {
           steps {
