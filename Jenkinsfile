@@ -58,10 +58,10 @@ pipeline {
                 // With Maven:
                 dir('test'){
                   git url: 'https://github.com/benrconway/MavenJenkins.git'
-                  withMaven(maven:'MavenTool') {
-                      sh "mvn test"
-                    }
-                    // sh "${MAVEN}/bin/mvn clean test" 
+                  // withMaven(maven:'MavenTool') {
+                  //     sh "mvn test"
+                  //   }
+                    sh "${MAVEN}/bin/mvn clean test" 
                   }
                 }
       }
