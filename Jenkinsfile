@@ -61,7 +61,7 @@ pipeline {
                   // withMaven(maven:'MavenTool') {
                   //     sh "mvn test"
                   //   }
-                    sh "${MAVEN}/bin/mvn clean test" 
+                    sh "${MAVEN}/bin/mvn -q clean test" 
                   }
                 }
       }
