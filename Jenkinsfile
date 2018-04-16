@@ -2,13 +2,13 @@
 
 pipeline {
     agent any
-    environment {
+    // environment {
 
       // Tool declaration allows the path of tools to differ between OSs
       // MAVEN = tool('MavenTool')
-      DOCKER = tool('testDocker')
+      // DOCKER = tool('testDocker')
       // SLACK_TOKEN = credentials('company_slack_token')
-    }
+    // }
     stages {
       stage('Build') {
           steps {
