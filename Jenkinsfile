@@ -13,7 +13,7 @@ pipeline {
       stage('Build') {
           steps {
             // Use of tool allows for greater portability across platforms.
-            sh "${DOCKER}/Contents/Resources/bin/docker build -q -t api ."
+            sh "docker build -q -t api ."
             // sh "${DOCKER}/Contents/Resources/bin/docker create --name npm_script_test -p 3000:3000 api"
             // sh "${DOCKER}/Contents/Resources/bin/docker start npm_script_test"
             // sh "${DOCKER}/Contents/Resources/bin/docker ps -a"
